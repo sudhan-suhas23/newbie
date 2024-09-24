@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Message</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="lid one"></div>
+        <div class="lid two"></div>
+        <div class="envelope-2-personal"></div>
+        <div class="letter">
+            <p id="personalMessage"></p>
+        </div>
+    </div>
+
+    <!-- Notification area -->
+    <div class="notification"> 
+        <p>Do you want to read completely?</p>
+        <button class="yes-btn">YES</button>
+        <button class="no-btn">NO</button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get('name');
+        let message;
+
+        if (name === 'Karthik') {
+            message = "Hello Karthik, wishing you an amazing birthday filled with joy!";
+        } else if (name === 'Muthu') {
+            message = "Hello Muthu, may your birthday be as fantastic as you are!";
+        } else {
+            message = "Hello there, enjoy your special day!";
+        }
+
+        document.getElementById('personalMessage').textContent = message;
+
+        let notificationShown = false;
+
+        // Event handling for notification and transitions
+        document.querySelector('.wrapper').addEventListener('mouseover', () => {
+            // Trigger notification after 3 seconds
+            setTimeout(() => {
+                document.querySelector('.notification').classList.add('show-notification');
+            }, 3000);
+        });
+
+        document.querySelector('.wrapper').addEventListener('dblclick', () => {
+            // Show notification if it was previously shown
+            if (notificationShown) {
+                document.querySelector('.notification').classList.add('show-notification');
+            }
+        });
+
+        document.querySelector('.yes-btn').addEventListener('click', () => {
+            // Transition page and go to the next page
+            document.body.classList.add('page-transition');
+            setTimeout(() => {
+                window.location.href = "Final.html"; // Redirect after transition
+            }, 800);
+        });
+
+        document.querySelector('.no-btn').addEventListener('click', () => {
+            // Hide notification
+            document.querySelector('.notification').classList.remove('show-notification');
+        });
+    </script>
+</body>
+</html>

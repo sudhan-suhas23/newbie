@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <title>Who Are You?</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+    <div class="circleCard">
+        <h2>Who are you?</h2>
+        <div class="options">
+            <button class="option" data-name="Karthik">Karthik</button>
+            <button class="option" data-name="Muthu">Muthu</button>
+            <button class="option" data-name="Kanchi">Kanchi</button>
+        </div>
+        <div class="message"></div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.option').forEach(button => {
+            button.addEventListener('click', () => {
+                const card = document.querySelector('.circleCard');
+                const name = button.getAttribute('data-name');
+
+                // Toss and flip animation
+                card.classList.add('flip');
+                setTimeout(() => {
+                    card.classList.remove('flip');
+
+                    const message=document.querySelector('.message')
+                    message.innerHTML = `<div class="envelope">Thank you ${name}! Now wait for your greet.</div>`;
+                    message.style.display = 'flex';
+
+                    setTimeout(() => {
+                       message.querySelector('.envelope').style.opacity = '1'; // Show the envelope
+                    }, 500);
+
+                    setTimeout(() => {
+                       document.body.style.transition = "opacity 1s";
+                       document.body.style.opacity = 0;
+
+                       setTimeout(() => {
+                          window.location.href = `index3.html?name=${name}`;
+                        }, 1000); // Wait for fade out to finish
+                   }, 4000); // Wait for 4 seconds before fading out
+               }, 1000); //
+            });
+        });
+    </script>
+</body>
+</html>
